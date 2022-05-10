@@ -38,6 +38,27 @@ Puzzles with no x-janko files:
 /Amibo
 /Analogien
 /Autoren
+/Banzu
+/Battleships-Lighthouses
+/Begriffe
+/Biographien
+/Blackbox
+/Bleistifte
+/Bodaburokku
+/Bogdan
+/Bolota
+/Bonsan
+/Branqueta
+/Carroll
+/Chatroom
+/Chokuhashi
+/Chronik
+/Cross-The-Streams
+/Diogenes
+/Doppel-Schokolade
+/Doughnut
+/Ekici
+/Friedman
 '''
 
 def createParsers():
@@ -104,6 +125,167 @@ def createParsers():
 
     # /Arukone-3
     parsermap['/Arukone-3'] = [psizegrid,prcgrid]
+
+    # /Battlemines
+    p0 = copy.deepcopy(psizegrid)
+    p0.addStr('ships') # list of integers???
+    parsermap['/Battlemines'] = [p0]
+
+    # /Battleships (edited: 16,39)
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsLabelsSize(p0)
+    p0.addStr('ships') # list of integers???
+    parsermap['/Battleships'] = [p0]
+
+    # /Battleships-Digital
+    parsermap['/Battleships-Digital'] = parsermap['/Battleships']
+
+    # /Battleships-Retrograde
+    parsermap['/Battleships-Retrograde'] = parsermap['/Battleships']
+
+    # /Bosanowa (edited: 34)
+    parsermap['/Bosanowa'] = [psizegrid,prcgrid]
+
+    # /Boxing-Match
+    p0 = copy.deepcopy(psizegrid)
+    p1 = copy.deepcopy(prcgrid)
+    p0.addGrid('cellimage','size','size')
+    p1.addGrid('cellimage','rows','cols')
+    parsermap['/Boxing-Match'] = [p0,p1]
+
+    # /Boxing-Match-2
+    p0 = copy.deepcopy(psizegridareas)
+    p1 = copy.deepcopy(prcgridareas)
+    ppu.addParamsMinMax(p0)
+    ppu.addParamsMinMax(p1)
+    parsermap['/Boxing-Match-2'] = [p0,p1]
+
+    # /Burokku
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('lines','size','size')
+    parsermap['/Burokku'] = [p0]
+
+    # /Campixu
+    parsermap['/Campixu'] = [prcgridareas]
+
+    # /Canal-View
+    parsermap['/Canal-View'] = [psizegrid]
+
+    # /Castle-Wall
+    parsermap['/Castle-Wall'] = [psizegrid,prcgrid]
+
+    # /Chocona
+    parsermap['/Chocona'] = [psizegridareas,prcgridareas]
+
+    # /Compass
+    parsermap['/Compass'] = [psizegrid]
+
+    # /Corral
+    parsermap['/Corral'] = [psizegrid,prcgrid]
+
+    # /Country-Road
+    parsermap['/Country-Road'] = [psizegridareas,prcgridareas]
+
+    # /Creek
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    p0.addGrid('problem','size','size',lambda x:x+1,lambda x:x+1)
+    p1 = copy.deepcopy(prcgrid)
+    p1.removeProp('problem')
+    p1.addGrid('problem','rows','cols',lambda x:x+1,lambda x:x+1)
+    parsermap['/Creek'] = [p0,p1]
+
+    # /Curving-Road
+    parsermap['/Curving-Road'] = [psizegrid]
+
+    # /Detektivschach
+    p0 = copy.deepcopy(psizegrid)
+    p0.addStr('pieces') # list of integers???
+    p0.addInt('begin') # some have integer on begin line
+    parsermap['/Detektivschach'] = [p0]
+
+    # /Detour
+    parsermap['/Detour'] = [psizegridareas,prcgridareas]
+
+    # /Different-Neighbors
+    parsermap['/Different-Neighbors'] = [psizegridareas]
+
+    # /Dominion
+    parsermap['/Dominion'] = [psizegrid]
+
+    # /Dominos
+    parsermap['/Dominos'] = [prcgrid]
+
+    # /Doppelblock
+    p0 = copy.deepcopy(prcgrid)
+    ppu.addParamsLabelsRC(p0)
+    parsermap['/Doppelblock'] = [p0]
+
+    # /Dosun-Fuwari
+    parsermap['/Dosun-Fuwari'] = [psizegridareas,prcgridareas]
+
+    # /Double-Back
+    parsermap['/Double-Back'] = [psizegridareas,prcgridareas]
+
+    # /Dutch-Loop (edited: 2)
+    parsermap['/Dutch-Loop'] = [psizegrid]
+
+    # /Ebony-Ivory
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsLabelsSize(p0,2)
+    p1 = copy.deepcopy(prcgrid)
+    ppu.addParamsLabelsRC(p1,2)
+    parsermap['/Ebony-Ivory'] = [p0,p1]
+
+    # /Eins-bis-X
+    p0 = copy.deepcopy(psizegridareas)
+    ppu.addParamsLabelsSize(p0)
+    parsermap['/Eins-bis-X'] = [p0]
+
+    # /Elbow-Room (edited: 5)
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsLabelsSize(p0)
+    p0.addStr('nlabels')
+    p0.addGrid('celltext','size','size')
+    parsermap['/Elbow-Room'] = [p0]
+
+    # /Entry-Exit
+    parsermap['/Entry-Exit'] = [psizegridareas]
+
+    # /Eulero
+    parsermap['/Eulero'] = [psizegrid]
+
+    # /Factors
+    parsermap['/Factors'] = [psizegridareas]
+
+    # /Fillodoku
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsPattern(p0)
+    parsermap['/Fillodoku'] = [p0]
+
+    # /Fillomino
+    parsermap['/Fillomino'] = [psizegrid,prcgrid]
+
+    # /Firumatto
+    parsermap['/Firumatto'] = [psizegrid]
+
+    # /Fobidoshi
+    parsermap['/Fobidoshi'] = [psizegrid]
+
+    # /Foseruzu (edited: 47)
+    parsermap['/Foseruzu'] = [psizegrid,prcgrid]
+
+    # /Futoshiki
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    p0.addGrid('problem','size','size',lambda x:2*x-1,lambda x:2*x-1)
+    parsermap['/Futoshiki'] = [p0]
+
+    # /Fuzuli
+    parsermap['/Fuzuli'] = [psizegrid]
+
+    # /Galaxien (edited: 445)
+    parsermap['/Galaxien'] = [psizegrid,prcgrid]
 
     # TODO
 

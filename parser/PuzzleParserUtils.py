@@ -16,10 +16,12 @@ def addParamsCommon(p: PuzzleParser):
     p.addStrLong('moves',re.compile(r';$'))
     p.addStr('source')
     p.addStr('rights')
+    p.addStr('check')
     p.addInt('unit')
     p.addInt('unitsize')
     p.addInt('depth')
     p.addStr('info')
+    p.addStr('infotext')
     p.addStr('date')
     p.addStr('title')
     p.addStr('variant')
@@ -59,6 +61,10 @@ def addParamsPattern(p: PuzzleParser):
     p.addInt('pattern')
     p.addInt('patternx')
     p.addInt('patterny')
+
+def addParamsMinMax(p: PuzzleParser):
+    p.addInt('min')
+    p.addInt('max')
 
 def makeParserRCGrid(areas: bool = False):
     p = PuzzleParser(True)
