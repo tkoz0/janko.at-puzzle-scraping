@@ -117,9 +117,12 @@ class PuzzleParser:
                 break
             if line[0] not in self._props:
                 raise ParseException('unknown property: '+line[0])
+            typenum,param1,param2 = self._props[line[0]]
             if line[0] in result:
                 self._print('WARNING: duplicate property: '+line[0]+'\n')
-            typenum,param1,param2 = self._props[line[0]]
+                # pick a new name to avoid data loss
+                while line[0] in result:
+                    line[0] += '_'
             if typenum == P_NONE:
                 result[line[0]] = None
                 if len(line) > 1:
@@ -153,10 +156,10 @@ class PuzzleParser:
                     assert isinstance(param2,int)
                     cols = param2
                 grid: List[List[str]] = []
-                for _ in range(rows):
+                for r in range(rows):
                     row = next(lines).split()
                     if len(row) != cols:
-                        raise ParseException('row with invalid length')
+                        raise ParseException('row with invalid length (prop = %s, row = %d)'%(line[0],r))
                     grid.append(row)
                 result[line[0]] = grid
             elif typenum == P_STR_LONG:
