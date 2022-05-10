@@ -16,6 +16,7 @@ def addParamsCommon(p: PuzzleParser):
     p.addStrLong('moves',re.compile(r';$'))
     p.addStr('source')
     p.addInt('unit')
+    p.addInt('unitsize')
     p.addInt('depth')
     p.addStr('info')
     p.addStr('title')
@@ -23,7 +24,7 @@ def addParamsCommon(p: PuzzleParser):
     p.addStr('layout')
     p.addStr('options')
     p.addStr('mail')
-    #p.addStr('pid')
+    p.addStr('pid')
 
 def addParamsRCGrid(p: PuzzleParser, areas: bool = False):
     p.addInt('rows')
@@ -47,6 +48,10 @@ def addParamsLabelsRC(p: PuzzleParser, count: int = 1):
 def addParamsLabelsSize(p: PuzzleParser, count: int = 1):
     p.addGrid('rlabels',count,'size')
     p.addGrid('clabels',count,'size')
+
+def addParamsLabelsRCDepth(p: PuzzleParser):
+    p.addGrid('rlabels','depth','rows')
+    p.addGrid('clabels','depth','cols')
 
 def addParamsPattern(p: PuzzleParser):
     p.addInt('pattern')

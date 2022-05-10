@@ -28,6 +28,25 @@ def createParsers():
     prcgrid = ppu.makeParserRCGrid()
     #parsermap['/'] = None
 
+    # /Abc-End-View
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsLabelsSize(p0,2)
+    p0.addStr('diagonals')
+    parsermap['/Abc-End-View'] = [p0]
+
+    # /Abc-Kombi
+    p0 = copy.deepcopy(prcgrid)
+    ppu.addParamsLabelsRCDepth(p0)
+    parsermap['/Abc-Kombi'] = [p0]
+
+    # /Abc-Pfad
+    p0 = PuzzleParser()
+    ppu.addParamsCommon(p0)
+    p0.addInt('size')
+    p0.addGrid('problem',7,7) # problem/solution are different sizes
+    p0.addGrid('solution',5,5) # they happen to always be 7x7 and 5x5
+    parsermap['/Abc-Pfad'] = [p0]
+
     # /Sudoku
     p0 = copy.deepcopy(psizegrid) # size/rc covers almost all
     p1 = copy.deepcopy(prcgrid)
@@ -54,6 +73,7 @@ if __name__ == '__main__':
     jsonl_data: List[Dict[str,Union[str,Dict[str,PropType]]]] = []
 
     tqdm.write('opening dir: '+dir_path+' (%d files)'%len(files))
+    failed_files = []
 
     for file in tqdm(files):
         file_rel = puzzle+'/'+os.path.split(file)[1] # relative to /Raetsel dir
@@ -70,9 +90,13 @@ if __name__ == '__main__':
         if result is None:
             tqdm.write('\n'.join(errors))
             tqdm.write('ERROR: not parsed')
+            failed_files.append(file)
         else:
             jsonl_data.append({'file':file_rel,'data':result})
 
+    print()
+    print('failed files (%d):'%len(failed_files))
+    print('\n'.join(failed_files))
     print()
     print('writing '+out_file+' (%d objects)'%len(jsonl_data))
     outf = open(out_file,'w')

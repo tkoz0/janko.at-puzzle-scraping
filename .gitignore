@@ -2,3 +2,4 @@
 /www.janko.at*.7z
 /puzzle_x-janko
 __pycache__
+/puzzle_jsonl
