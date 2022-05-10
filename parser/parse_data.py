@@ -23,9 +23,33 @@ base_dir = os.path.normpath('../puzzle_x-janko/')
 # puzzle path -> list of parsers to try (try in order until one works)
 parsermap: Dict[str,List[PuzzleParser]] = dict()
 
+'''
+Puzzles with no x-janko files:
+/Airando
+/Aisurom
+/Alphametics
+/Alphametics/Additionen
+/Alphametics/Goetter
+/Alphametics/Klassisch
+/Alphametics/Loy
+/Alphametics/Metamatik
+/Alphametics/Wurzeln
+/Altay
+/Amibo
+/Analogien
+/Autoren
+'''
+
 def createParsers():
+    '''
+    Setup the parsers used for each puzzle. Puzzles are annotated with which
+    ones had to have the .x-janko files edited to complete successfully. Some
+
+    '''
     psizegrid = ppu.makeParserSizeGrid()
     prcgrid = ppu.makeParserRCGrid()
+    psizegridareas = ppu.makeParserSizeGrid(True)
+    prcgridareas = ppu.makeParserRCGrid(True)
     #parsermap['/'] = None
 
     # /Abc-End-View
@@ -46,6 +70,40 @@ def createParsers():
     p0.addGrid('problem',7,7) # problem/solution are different sizes
     p0.addGrid('solution',5,5) # they happen to always be 7x7 and 5x5
     parsermap['/Abc-Pfad'] = [p0]
+
+    # /Aisuban
+    parsermap['/Aisuban'] = [psizegridareas,prcgridareas]
+
+    # /Akari
+    parsermap['/Akari'] = [psizegrid,prcgrid]
+
+    # /Anglers (edited: 35)
+    parsermap['/Anglers'] = [psizegrid,prcgrid]
+
+    # /Aqre
+    parsermap['/Aqre'] = [psizegridareas]
+
+    # /Araf (moved: Different-Neighbors, Inequality)
+    parsermap['/Araf'] = [psizegrid,prcgrid]
+
+    # /Area-51
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('nodes',10,10) # happens to be 10x10 for all of them
+    parsermap['/Area-51'] = [p0]
+
+    # /Armyants
+    parsermap['/Armyants'] = [psizegridareas,prcgridareas]
+
+    # /Arukone
+    parsermap['/Arukone'] = [psizegrid,prcgrid]
+
+    # /Arukone-2
+    parsermap['/Arukone-2'] = [psizegrid,prcgrid]
+
+    # /Arukone-3
+    parsermap['/Arukone-3'] = [psizegrid,prcgrid]
+
+    # TODO
 
     # /Sudoku
     p0 = copy.deepcopy(psizegrid) # size/rc covers almost all
