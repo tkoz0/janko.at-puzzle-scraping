@@ -83,3 +83,8 @@ be anything, preferably with the `.jsonl` extension.
 Downloader script does not actually download all the puzzles from the website.
 For example, there are 20 Area-51 puzzles, but only 3 are downloaded. A possible
 solution is to enumerate puzzles and try to download pages individually.
+
+Another reasonable solution is to attempt to download higher numbered puzzles by
+looking at the numbers that already exist in a directory (or starting from 1 if
+it happens to be an empty directory). This process could try until finding a
+page without the "data" element, possibly the 404 page.
