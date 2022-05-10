@@ -66,9 +66,9 @@ def createParsers():
     # /Abc-Pfad
     p0 = PuzzleParser()
     ppu.addParamsCommon(p0)
-    p0.addInt('size')
-    p0.addGrid('problem',7,7) # problem/solution are different sizes
-    p0.addGrid('solution',5,5) # they happen to always be 7x7 and 5x5
+    p0.addInt('size') # the grids happen to always be 7x7 and 5x5
+    p0.addGrid('problem','size','size',lambda x:x+2,lambda x:x+2)
+    p0.addGrid('solution','size','size')
     parsermap['/Abc-Pfad'] = [p0]
 
     # /Aisuban
@@ -88,8 +88,10 @@ def createParsers():
 
     # /Area-51
     p0 = copy.deepcopy(psizegrid)
-    p0.addGrid('nodes',10,10) # happens to be 10x10 for all of them
-    parsermap['/Area-51'] = [p0]
+    p0.addGrid('nodes','size','size',lambda x:x+1,lambda x:x+1)
+    p1 = copy.deepcopy(prcgrid)
+    p1.addGrid('nodes','rows','cols',lambda x:x+1,lambda x:x+1)
+    parsermap['/Area-51'] = [p0,p1]
 
     # /Armyants
     parsermap['/Armyants'] = [psizegridareas,prcgridareas]

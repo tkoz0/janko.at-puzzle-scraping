@@ -46,8 +46,6 @@ from typing import Any, Callable, Dict, Iterator, List, Pattern, Tuple, Union
 
 from PeekableIterator import PeekableIterator
 
-# TODO GET RID OF INT TYPES
-
 # property types
 P_NONE = 0 # property only, no value
 P_STR = 1 # same line string
@@ -67,7 +65,7 @@ class PuzzleParser:
     file.
     '''
     # Tuple[int,Any,Any] specifies property type and parameters it may use
-    _props: Dict[str,Tuple[int,Any,Any]]
+    _props: Dict[str,Tuple[int,Any,Any,Any,Any]]
     _use_beg_end: bool
     _print: Callable[[str],Any] = sys.stderr.write # for printing errors
     def __init__(self, _use_beg_end: bool = True, err = tqdm.tqdm.write):
@@ -77,23 +75,24 @@ class PuzzleParser:
         self._print = err
     def addNone(self, prop: str):
         assert prop != "" and prop not in self._props
-        self._props[prop] = (P_NONE,None,None)
+        self._props[prop] = (P_NONE,None,None,None,None)
     def addStr(self, prop: str):
         assert prop != "" and prop not in self._props
-        self._props[prop] = (P_STR,None,None)
+        self._props[prop] = (P_STR,None,None,None,None)
     def addInt(self, prop: str):
         assert prop != "" and prop not in self._props
-        self._props[prop] = (P_INT,None,None)
-    def addGrid(self, prop: str, rows: GridParamType, cols: GridParamType):
+        self._props[prop] = (P_INT,None,None,None,None)
+    def addGrid(self, prop: str, rows: GridParamType, cols: GridParamType,
+            rowfunc: Callable[[int],int] = lambda x:x, colfunc: Callable[[int],int] = lambda x:x):
         assert prop != "" and prop not in self._props
         if isinstance(rows,str):
             assert rows in self._props
         if isinstance(cols,str):
             assert cols in self._props
-        self._props[prop] = (P_GRID,rows,cols)
+        self._props[prop] = (P_GRID,rows,cols,rowfunc,colfunc)
     def addStrLong(self, prop: str, regex: Pattern):
         assert prop != "" and prop not in self._props
-        self._props[prop] = (P_STR_LONG,regex,None)
+        self._props[prop] = (P_STR_LONG,regex,None,None,None)
     def removeProp(self, prop: str):
         del self._props[prop]
     def parse(self, input_lines: Iterator[str]) -> Dict[str,PropType]:
@@ -117,7 +116,7 @@ class PuzzleParser:
                 break
             if line[0] not in self._props:
                 raise ParseException('unknown property: '+line[0])
-            typenum,param1,param2 = self._props[line[0]]
+            typenum,param1,param2,param3,param4 = self._props[line[0]]
             if line[0] in result:
                 self._print('WARNING: duplicate property: '+line[0]+'\n')
                 # pick a new name to avoid data loss
@@ -155,6 +154,12 @@ class PuzzleParser:
                 else:
                     assert isinstance(param2,int)
                     cols = param2
+                # apply functions to dimensions
+                assert callable(param3)
+                assert callable(param4)
+                rows = param3(rows)
+                cols = param4(cols)
+                # parse grid
                 grid: List[List[str]] = []
                 for r in range(rows):
                     row = next(lines).split()
