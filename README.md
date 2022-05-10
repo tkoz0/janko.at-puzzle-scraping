@@ -77,3 +77,9 @@ step may produce errors and require defining parsers or manually editing the
 `.x-janko` files to complete successfully. The puzzle is specified as a path
 relative to `/Raetsel` on the server, such as `/Sudoku` and the output file can
 be anything, preferably with the `.jsonl` extension.
+
+# todo
+
+Downloader script does not actually download all the puzzles from the website.
+For example, there are 20 Area-51 puzzles, but only 3 are downloaded. A possible
+solution is to enumerate puzzles and try to download pages individually.
