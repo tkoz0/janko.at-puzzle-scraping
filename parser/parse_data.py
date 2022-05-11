@@ -120,6 +120,17 @@ Puzzles with no x-janko files:
 /Sukaku
 /Sukima
 /Summandum
+/Takahiko
+/Targets
+/Tawa
+/Triplace
+/Trivia
+/Um-Die-Ecke-Gedacht
+/Vermischtes
+/Wortwandlung
+/WPF
+/Zahlenpfad
+/Zeiger
 '''
 
 def createParsers():
@@ -918,6 +929,146 @@ def createParsers():
     p0.addStrLong('problem',re.compile(r'^.*[^n]$')) # until "solution" line
     p0.addStrLong('solution',re.compile(r'^.*[^sd]$')) # until "moves" line or "end" line
     parsermap['/Symbolrechnen'] = [p0]
+
+    # /Tairupeinto
+    parsermap['/Tairupeinto'] = [psizegridareas_labels1]
+
+    # /Tapa
+    parsermap['/Tapa'] = [psizegrid,prcgrid]
+
+    # /Tapa-Varienten (moved: all)
+
+    # /Tasukuea (edited: 8)
+    parsermap['/Tasukuea'] = [psizegrid]
+
+    # /Tatamibari (edited: 117)
+    parsermap['/Tatamibari'] = [psizegrid]
+
+    # /Tateboo-Yokoboo
+    parsermap['/Tateboo-Yokoboo'] = [psizegrid,prcgrid]
+
+    # /Terra-X
+    parsermap['/Terra-X'] = [psizegridareas]
+
+    # /Tetroid
+    parsermap['/Tetroid'] = [psizegrid]
+
+    # /Thermometer
+    p0 = copy.deepcopy(psizegrid_labels1)
+    p0.addGrid('labels','size','size')
+    parsermap['/Thermometer'] = [p0]
+
+    # /Tohu-Wa-Vohu
+    parsermap['/Tohu-Wa-Vohu'] = [psizegrid]
+
+    # /Toichika
+    parsermap['/Toichika'] = [psizegridareas]
+
+    # /Trace-Numbers
+    parsermap['/Trace-Numbers'] = [prcgrid]
+
+    # /Trilogik
+    parsermap['/Trilogik'] = [psizegrid]
+
+    # /Trinudo
+    parsermap['/Trinudo'] = [psizegrid]
+
+    # /Tripletts
+    parsermap['/Tripletts'] = [prcgridareas,psizegridareas]
+
+    # /Tueren
+    parsermap['/Tueren'] = [psizegrid]
+
+    # /Usoone (edited: 51)
+    parsermap['/Usoone'] = [psizegridareas]
+
+    # /Usotatami
+    parsermap['/Usotatami'] = [psizegrid]
+
+    # /Varianten (moved: all)
+
+    # /Vier-Winde
+    parsermap['/Vier-Winde'] = [psizegrid]
+
+    # /View
+    parsermap['/View'] = [psizegrid]
+
+    # /Wasserspass (edited: 3)
+    p0 = copy.deepcopy(psizegrid_labels1)
+    p0.addGrid('lines','size','size')
+    p1 = copy.deepcopy(prcgrid_labels1)
+    p1.addGrid('lines','rows','cols')
+    parsermap['/Wasserspass'] = [p0,p1]
+
+    # /Wolkenkratzer (edited: 410) (first puzzle in 410 is broken)
+    parsermap['/Wolkenkratzer'] = [psizegrid_labels2]
+
+    # /Wolkenkratzer-2
+    parsermap['/Wolkenkratzer-2'] = [psizegrid_labels2]
+
+    # /Yagit
+    parsermap['/Yagit'] = [psizegrid]
+
+    # /Yajikabe
+    parsermap['/Yajikabe'] = [psizegrid]
+
+    # /Yajilin
+    parsermap['/Yajilin'] = [psizegrid,prcgrid]
+
+    # /Yajilin-Regional
+    parsermap['/Yajilin-Regional'] = [psizegridareas,prcgridareas]
+
+    # /Yajisan-Kazusan (moved: Inverted,Liar,Liar-Arrows,No-2x2,Odd,Off-By-One)
+    parsermap['/Yajisan-Kazusan'] = [psizegrid,prcgrid]
+
+    # /Yakuso
+    parsermap['/Yakuso'] = [psizegrid,prcgrid]
+
+    # /Yin-Yang
+    parsermap['/Yin-Yang'] = [psizegrid]
+
+    # /Yonmasu
+    parsermap['/Yonmasu'] = [psizegrid]
+
+    # /Yosenabe
+    parsermap['/Yosenabe'] = [psizegridareas]
+
+    # /Zahlenkreuz
+    parsermap['/Zahlenkreuz'] = [psizegrid_labels1]
+
+    # /Zahlenlabyrith (edited: 1)
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('lines','size','size')
+    parsermap['/Zahlenlabyrinth'] = [p0]
+
+    # /Zahlenschlange
+    parsermap['/Zahlenschlange'] = [psizegrid]
+
+    # /Zehnergitter
+    parsermap['/Zehnergitter'] = [prcgrid]
+
+    # /Zeltlager
+    parsermap['/Zeltlager'] = [psizegrid,prcgrid]
+
+    # /Zeltlager-2 (edited: 345)
+    parsermap['/Zeltlager-2'] = [psizegrid]
+
+    # /Ziegelmauer
+    p0 = copy.deepcopy(psizegrid)
+    p0.addStr('areas')
+    parsermap['/Ziegelmauer'] = [p0]
+
+    # /Zipline
+    parsermap['/Zipline'] = [prcgrid]
+
+    # /Zitatemix
+    p0 = copy.deepcopy(prcgrid)
+    p0.removeProp('solution')
+    p0.addStrLong('solution',re.compile(r'^.+...$')) # lines with >= 4 chars
+    parsermap['/Zitatemix'] = [p0]
+
+    # /Zwischenknick (edited: 3)
+    parsermap['/Zwischenknick'] = [psizegrid]
 
 createParsers()
 

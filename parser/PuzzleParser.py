@@ -124,6 +124,7 @@ class PuzzleParser:
             if line == ['end']: # TODO add ["send"] since it is a common error? (also ["eend"])
                 found_end = True
                 break
+            # TODO use line[0].lower() for props instead
             if line[0] not in self._props:
                 raise ParseException('unknown property: '+line[0])
             typenum,param1,param2,param3,param4,param5 = self._props[line[0]]
