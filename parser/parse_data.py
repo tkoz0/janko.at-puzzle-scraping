@@ -11,6 +11,7 @@ the root, /Sudoku for Sudoku, and so on)
 import copy
 import json
 import os
+import re
 import sys
 from tqdm import tqdm
 from typing import Dict, List, Union
@@ -87,6 +88,38 @@ Puzzles with no x-janko files:
 /Milchtee
 /Mittelweg
 /Molekularis
+/Nagareru
+/Nagewawa
+/Nanro/Double
+/Nanro/Doubleback
+/Nanro/Hex
+/Nanro/Litro
+/Nanro/Loop
+/Nanro/Odd-Even
+/Nanro/Signpost
+/Nikoli
+/Nishiyama
+/Null-Zwei-Fuenf
+/OAPC
+/Out-Of-Sight
+/Pathfinder
+/Peeters
+/Pentominos
+/Physik
+/Polyonimos
+/Portugalov
+/Rectslider
+/Renban-Madoguchi
+/Saltatori
+/Sashikaku
+/Serpentominos
+/Sphinx
+/Stained-Glass
+/Statue-Park
+/Sudoku/Subset
+/Sukaku
+/Sukima
+/Summandum
 '''
 
 def createParsers():
@@ -542,7 +575,226 @@ def createParsers():
     # /Mosaik
     parsermap['/Mosaik'] = [prcgrid,psizegrid]
 
-    # TODO
+    # /Nachbarn
+    parsermap['/Nachbarn'] = [psizegrid,prcgrid]
+
+    # /Nanbaboru
+    parsermap['/Nanbaboru'] = [psizegrid]
+
+    # /Nanro
+    parsermap['/Nanro'] = [psizegridareas]
+
+    # /Naoki (moved: all)
+
+    # /Nawabari
+    parsermap['/Nawabari'] = [psizegrid]
+
+    # /Nondango
+    parsermap['/Nondango'] = [psizegridareas,prcgridareas]
+
+    # /Nonogramme (edited: 2125)
+    parsermap['/Nonogramme'] = [prcgrid,psizegrid]
+
+    # /Norinori
+    parsermap['/Norinori'] = [psizegridareas,prcgridareas]
+
+    # /Nuribou
+    parsermap['/Nuribou'] = [psizegrid]
+
+    # /Nurikabe
+    parsermap['/Nurikabe'] = [prcgrid,psizegrid]
+
+    # /Nurikabe-Pairs
+    parsermap['/Nurikabe-Pairs'] = [psizegrid]
+
+    # /Nurimaze (moved: Dead-End,Forbidden-Four)
+    parsermap['/Nurimaze'] = [psizegridareas,prcgridareas]
+
+    # /Nurimisaki
+    parsermap['/Nurimisaki'] = [psizegrid]
+
+    # /Oasis
+    parsermap['/Oasis'] = [psizegrid]
+
+    # /Partiti
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsMinMax(p0)
+    p0.addGrid('cornertext','size','size')
+    parsermap['/Partiti'] = [p0]
+
+    # /Patchwork
+    parsermap['/Patchwork'] = [psizegridareas]
+
+    # /Peintoeria
+    parsermap['/Peintoeria'] = [psizegridareas]
+
+    # /Pfeilnetz
+    parsermap['/Pfeilnetz'] = [psizegrid]
+
+    # /Pfeilpfad (edited: 175)
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('labels','size','size')
+    parsermap['/Pfeilpfad'] = [p0]
+
+    # /Pfeilzahlen (edited: 24,81)
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    p0.removeProp('solution')
+    p0.addGrid('problem','size','size',lambda x:x+2,lambda x:x+2)
+    p0.addGrid('solution','size','size',lambda x:x+2,lambda x:x+2)
+    p1 = copy.deepcopy(p0)
+    p1.removeProp('problem')
+    p1.addGrid('problem','size','size')
+    parsermap['/Pfeilzahlen'] = [p0,p1]
+
+    # /Pillen
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    p0.addGrid('problem','size','size',lambda x:x+1,lambda x:x+1)
+    p1 = copy.deepcopy(prcgrid)
+    p1.removeProp('problem')
+    p1.addGrid('problem','rows','cols',lambda x:x+1,lambda x:x+1)
+    parsermap['/Pillen'] = [p0,p1]
+
+    # /Pipeline
+    p0 = copy.deepcopy(prcgrid_labels1)
+    p1 = copy.deepcopy(psizegrid_labels1)
+    p0.setCommentChars(';') # 1-20 have lines starting with ;
+    p1.setCommentChars(';')
+    parsermap['/Pipeline'] = [p0,p1]
+
+    # /Pipelink
+    parsermap['/Pipelink'] = [psizegrid,prcgrid]
+
+    # /Putteria (edited: 1)
+    parsermap['/Putteria'] = [psizegridareas,prcgridareas]
+
+    # /Raitonanba
+    parsermap['/Raitonanba'] = [psizegrid]
+
+    # /Rechengitter
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    # assume grid is lines until the "solution" property right after
+    p0.addStrLong('problem',re.compile(r'^.*[^n]$'))
+    p0.addNone('negative')
+    parsermap['/Rechengitter'] = [p0]
+
+    # /Reflect (edited: 119)
+    parsermap['/Reflect'] = [psizegrid,prcgrid]
+
+    # /Regenwolken
+    parsermap['/Regenwolken'] = [psizegrid]
+
+    # /Rekuto
+    parsermap['/Rekuto'] = [psizegrid]
+
+    # /Renban
+    parsermap['/Renban'] = [psizegridareas]
+
+    # /Renkatsu
+    parsermap['/Renkatsu'] = [psizegrid]
+
+    # /Roma
+    parsermap['/Roma'] = [psizegridareas]
+
+    # /Rukkuea
+    parsermap['/Rukkuea'] = [psizegrid]
+
+    # /Rundreise (edited: 5)
+    parsermap['/Rundreise'] = [psizegrid,prcgrid]
+
+    # /Sashigane (edited: 20,60)
+    parsermap['/Sashigane'] = [psizegrid,prcgrid]
+
+    # /Sashikabe
+    parsermap['/Sashikabe'] = [psizegrid]
+
+    # /Satogaeri
+    parsermap['/Satogaeri'] = [psizegridareas]
+
+    # /Schlange
+    parsermap['/Schlange'] = [psizegrid_labels1]
+
+    # /Schlange/Akkara
+    p0 = copy.deepcopy(psizegrid)
+    p0.addStr('nlabels')
+    parsermap['/Schlange/Akkara'] = [p0]
+
+    # /Schlange/Knight
+    parsermap['/Schlange/Knight'] = parsermap['/Schlange/Akkara']
+
+    # /Scrin
+    parsermap['/Scrin'] = [psizegrid,prcgrid]
+
+    # /Seek-Numbers (deleted: 13,14)
+    parsermap['/Seek-Numbers'] = [prcgrid]
+
+    # /Shakashaka
+    parsermap['/Shakashaka'] = [psizegrid,prcgrid]
+
+    # /Shimaguni
+    parsermap['/Shimaguni'] = [psizegridareas]
+
+    # /Shingoki
+    parsermap['/Shingoki'] = [psizegrid]
+
+    # /Shirokuro
+    parsermap['/Shirokuro'] = [psizegrid]
+
+    # /Shugaku
+    parsermap['/Shugaku'] = [psizegrid,prcgrid]
+
+    # /Sikaku (edited: 313)
+    parsermap['/Sikaku'] = [prcgrid,psizegrid]
+
+    # /Slitherlink (edited: 1104)
+    parsermap['/Slitherlink'] = [prcgrid,psizegrid]
+
+    # /Snake-Pit
+    parsermap['/Snake-Pit'] = [psizegrid,prcgrid]
+
+    # /Spotlight
+    parsermap['/Spotlight'] = [psizegrid]
+
+    # /Spukschloss (edited: 10)
+    p0 = copy.deepcopy(psizegrid)
+    p0.removeProp('problem')
+    p0.addGrid('problem','size','size',lambda x:x+2,lambda x:x+2)
+    p0.addInt('ghosts')
+    p0.addInt('zombies')
+    p0.addInt('vampires')
+    p1 = copy.deepcopy(prcgrid)
+    p1.removeProp('problem')
+    p1.addGrid('problem','rows','cols',lambda x:x+2,lambda x:x+2)
+    p1.addInt('ghosts')
+    p1.addInt('zombies')
+    p1.addInt('vampires')
+    parsermap['/Spukschloss'] = [p0,p1]
+
+    # /SquarO
+    parsermap['/SquarO'] = [psizegrid]
+
+    # /Sternenhaufen
+    parsermap['/Sternenhaufen'] = [psizegrid]
+
+    # /Sternenhimmel (edited: 25)
+    parsermap['/Sternenhimmel'] = [psizegrid_labels1,prcgrid_labels1]
+
+    # /Sternennacht (edited: 26)
+    parsermap['/Sternennacht'] = [prcgrid_labels1]
+
+    # /Sternenschlacht
+    parsermap['/Sternenschlacht'] = [psizegridareas]
+
+    # /Stitches (edited: 2)
+    parsermap['/Stitches'] = [psizegridareas_labels1]
+
+    # /Stostone
+    parsermap['/Stostone'] = [psizegridareas,prcgridareas]
+
+    # /Straights (edited: 5,463)
+    parsermap['/Straights'] = [psizegrid]
 
     # /Sudoku
     p0 = copy.deepcopy(psizegrid) # size/rc covers almost all
@@ -556,6 +808,116 @@ def createParsers():
     p2.addGrid('problem',9,9) # some do not specify grid size (1161-1190)
     p2.addGrid('solution',9,9)
     parsermap['/Sudoku'] = [p0,p1,p2]
+
+    # /Sudoku/2D
+    parsermap['/Sudoku/2D'] = [psizegrid]
+
+    # /Sudoku/Butterfly
+    parsermap['/Sudoku/Butterfly'] = [psizegrid]
+
+    # /Sudoku/Chaos
+    parsermap['/Sudoku/Chaos'] = [psizegridareas]
+
+    # /Sudoku/Clueless-1
+    parsermap['/Sudoku/Clueless-1'] = [psizegrid]
+
+    # /Sudoku/Clueless-2
+    parsermap['/Sudoku/Clueless-2'] = [psizegrid]
+
+    # /Sudoku/Flower
+    parsermap['/Sudoku/Flower'] = [psizegrid]
+
+    # /Sudoku/Gattai-8
+    parsermap['/Sudoku/Gattai-8'] = [prcgrid]
+
+    # /Sudoku/Killer
+    p0 = copy.deepcopy(psizegridareas)
+    ppu.addParamsPattern(p0)
+    p1 = copy.deepcopy(prcgridareas)
+    ppu.addParamsPattern(p1)
+    parsermap['/Sudoku/Killer'] = [p0,p1]
+
+    # /Sudoku/Konsekutiv (edited: 95)
+    parsermap['/Sudoku/Konsekutiv'] = [psizegrid]
+
+    # /Sudoku/Kropki
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsPattern(p0)
+    parsermap['/Sudoku/Kropki'] = [p0]
+
+    # /Sudoku/Magic-Number
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('clues','size','size')
+    p0.addInt('magic')
+    parsermap['/Sudoku/Magic-Number'] = [p0]
+
+    # /Sudoku/Odd-Even
+    parsermap['/Sudoku/Odd-Even'] = [psizegrid]
+
+    # /Sudoku/Randsummen (edited: 94)
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsPattern(p0)
+    parsermap['/Sudoku/Randsummen'] = [p0]
+
+    # /Sudoku/Samurai
+    parsermap['/Sudoku/Samurai'] = [psizegrid]
+
+    # /Sudoku/Shogun
+    parsermap['/Sudoku/Shogun'] = [prcgrid]
+
+    # /Sudoku/Sohei
+    parsermap['/Sudoku/Sohei'] = [psizegrid]
+
+    # /Sudoku/Sumo
+    parsermap['/Sudoku/Sumo'] = [psizegrid]
+
+    # /Sudoku/Vergleich
+    p0 = copy.deepcopy(psizegrid)
+    ppu.addParamsPattern(p0)
+    p0.addGrid('clues','size','size')
+    parsermap['/Sudoku/Vergleich'] = [p0]
+
+    # /Sudoku/Windmill
+    parsermap['/Sudoku/Windmill'] = [psizegrid]
+
+    # /Sudoku/Wolkenkratzer
+    parsermap['/Sudoku/Wolkenkratzer'] = [psizegrid]
+
+    # /Sudoku-Cup (moved: all)
+
+    # /Sudoku-Varianten (moved: all)
+
+    # /Suguru (edited: 3)
+    parsermap['/Suguru'] = [psizegridareas]
+
+    # /Sukano
+    p0 = copy.deepcopy(psizegrid)
+    p0.addGrid('rlabels','size','size',flags='s')
+    p0.addGrid('clabels','size','size',flags='s')
+    parsermap['/Sukano'] = [p0]
+
+    # /Sukoro
+    parsermap['/Sukoro'] = [psizegrid]
+
+    # /Sukrokuro
+    parsermap['/Sukrokuro'] = [psizegrid]
+
+    # /Sumdoku
+    parsermap['/Sumdoku'] = [psizegridareas]
+
+    # /Suraido
+    parsermap['/Suraido'] = [psizegrid]
+
+    # /Suraromu
+    parsermap['/Suraromu'] = [psizegrid,prcgrid]
+
+    # /Symbolrechnen
+    p0 = copy.deepcopy(prcgrid)
+    p0.removeProp('problem')
+    p0.removeProp('solution')
+    p0.addStrLong('problem',re.compile(r'^.*[^n]$')) # until "solution" line
+    p0.addStrLong('solution',re.compile(r'^.*[^sd]$')) # until "moves" line or "end" line
+    parsermap['/Symbolrechnen'] = [p0]
 
 createParsers()
 

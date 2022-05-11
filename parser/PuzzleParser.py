@@ -68,11 +68,19 @@ class PuzzleParser:
     _props: Dict[str,Tuple[int,Any,Any,Any,Any,Any]]
     _use_beg_end: bool
     _print: Callable[[str],Any] = sys.stderr.write # for printing errors
-    def __init__(self, _use_beg_end: bool = True, err = tqdm.tqdm.write):
+    _comment_chars: str # lines starting with these chars are considered comments
+    def __init__(self, use_beg_end: bool = True, err = tqdm.tqdm.write, comment_chars: str = ''):
         ''' Initialize a new PuzzleParser '''
         self._props = dict()
-        self._use_beg_end = _use_beg_end
+        self._use_beg_end = use_beg_end
         self._print = err
+        self._comment_chars = comment_chars
+    def setUseBegEnd(self, use_beg_end: bool):
+        self._use_beg_end = use_beg_end
+    def setErrPrint(self, err: Callable[[str],Any]):
+        self._print = err
+    def setCommentChars(self, comment_chars: str = ''):
+        self._comment_chars = comment_chars
     def addNone(self, prop: str):
         assert prop != "" and prop not in self._props
         self._props[prop] = (P_NONE,None,None,None,None,None)
@@ -99,7 +107,7 @@ class PuzzleParser:
         del self._props[prop]
     def parse(self, input_lines: Iterator[str]) -> Dict[str,PropType]:
         lines = PeekableIterator(line.strip() for line in input_lines
-                                    if line.strip() != '')
+                if line.strip() != '' and line.strip()[0] not in self._comment_chars)
         result: Dict[str,PropType] = dict()
         if self._use_beg_end:
             try:
@@ -113,7 +121,7 @@ class PuzzleParser:
                 line = next(lines).split()
             except StopIteration:
                 break
-            if line == ['end']:
+            if line == ['end']: # TODO add ["send"] since it is a common error? (also ["eend"])
                 found_end = True
                 break
             if line[0] not in self._props:
