@@ -61,7 +61,9 @@ Puzzles with no x-janko files:
 /Ekici
 /Friedman
 /Gedichte
+/Gedichte/04
 /Gedichte/07
+/Gedichte/08
 /Gedichte/10
 /H2O
 /Hiroimono
@@ -90,13 +92,7 @@ Puzzles with no x-janko files:
 /Molekularis
 /Nagareru
 /Nagewawa
-/Nanro/Double
-/Nanro/Doubleback
 /Nanro/Hex
-/Nanro/Litro
-/Nanro/Loop
-/Nanro/Odd-Even
-/Nanro/Signpost
 /Nikoli
 /Nishiyama
 /Null-Zwei-Fuenf
@@ -594,6 +590,31 @@ def createParsers():
 
     # /Nanro
     parsermap['/Nanro'] = [psizegridareas]
+
+    # /Nanro/Double
+    parsermap['/Nanro/Double'] = [psizegridareas]
+
+    # /Nanro/Doubleback
+    parsermap['/Nanro/Doubleback'] = [psizegridareas]
+
+    # /Nanro/Litro
+    p0 = copy.deepcopy(psizegridareas)
+    p0.addGrid('cornertext','size','size')
+    parsermap['/Nanro/Litro'] = [p0]
+
+    # /Nanro/Loop
+    parsermap['/Nanro/Loop'] = [psizegridareas]
+
+    # /Nanro/Odd-Even
+    parsermap['/Nanro/Odd-Even'] = [psizegridareas]
+
+    # /Nanro/Outside
+    p0 = copy.deepcopy(psizegridareas_labels2)
+    p0.addStr('nlabels')
+    parsermap['/Nanro/Outside'] = [p0]
+
+    # /Nanro/Signpost (deleted: 15,16,17,18)
+    parsermap['/Nanro/Signpost'] = parsermap['/Nanro/Litro']
 
     # /Naoki (moved: all)
 
