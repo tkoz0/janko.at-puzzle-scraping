@@ -121,30 +121,30 @@ class PuzzleParser:
                 line = next(lines).split()
             except StopIteration:
                 break
-            if line == ['end']: # TODO add ["send"] since it is a common error? (also ["eend"])
+            if line == ['end'] or line == ['send'] or line == ['eend'] or line == ['endend']:
                 found_end = True
                 break
-            # TODO use line[0].lower() for props instead
-            if line[0] not in self._props:
-                raise ParseException('unknown property: '+line[0])
-            typenum,param1,param2,param3,param4,param5 = self._props[line[0]]
-            if line[0] in result:
-                self._print('WARNING: duplicate property: '+line[0]+'\n')
+            prop = line[0].lower()
+            if prop not in self._props:
+                raise ParseException('unknown property: '+prop)
+            typenum,param1,param2,param3,param4,param5 = self._props[prop]
+            if prop in result:
+                self._print('WARNING: duplicate property: '+prop+'\n')
                 # pick a new name to avoid data loss
-                while line[0] in result:
-                    line[0] += '_'
+                while prop in result:
+                    prop += '_'
             if typenum == P_NONE:
-                result[line[0]] = None
+                result[prop] = None
                 if len(line) > 1:
-                    self._print('WARNING: extra data for none property: '+line[0]+'\n')
+                    self._print('WARNING: extra data for none property: '+prop+'\n')
             elif typenum == P_STR:
-                result[line[0]] = ' '.join(line[1:])
-                if result[line[0]] == '':
-                    self._print('WARNING: string property value empty: '+line[0]+'\n')
+                result[prop] = ' '.join(line[1:])
+                if result[prop] == '':
+                    self._print('WARNING: string property value empty: '+prop+'\n')
             elif typenum == P_INT:
-                result[line[0]] = int(line[1])
+                result[prop] = int(line[1])
                 if len(line) > 2:
-                    self._print('WARNING: extra data for int property: '+line[0]+'\n')
+                    self._print('WARNING: extra data for int property: '+prop+'\n')
             elif typenum == P_GRID:
                 assert isinstance(param5,str)
                 # parse a grid, possibly convert to ints
@@ -176,11 +176,11 @@ class PuzzleParser:
                 for r in range(rows):
                     row = next(lines).split()
                     if 's' not in param5 and len(row) != cols:
-                        raise ParseException('row with invalid length (prop = %s, row = %d)'%(line[0],r))
+                        raise ParseException('row with invalid length (prop = %s, row = %d)'%(prop,r))
                     if 's' in param5 and len(row) > cols:
-                        raise ParseException('row >= col length (prop = %s, row = %d)'%(line[0],r))
+                        raise ParseException('row >= col length (prop = %s, row = %d)'%(prop,r))
                     grid.append(row)
-                result[line[0]] = grid
+                result[prop] = grid
             elif typenum == P_STR_LONG:
                 longstr = ''
                 assert isinstance(param1,Pattern)
@@ -192,7 +192,7 @@ class PuzzleParser:
                             break
                     except StopIteration:
                         break
-                result[line[0]] = longstr
+                result[prop] = longstr
             else:
                 assert 0
         if self._use_beg_end and not found_end:
