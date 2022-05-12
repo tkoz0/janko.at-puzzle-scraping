@@ -1218,7 +1218,12 @@ def main(puzzle: str, out_file: str):
         assert 0
 
 if __name__ == '__main__':
-    #main(sys.argv[1],sys.argv[2])
-    for puzzle in parsermap:
-        main(puzzle,'/dev/null')
+    if len(sys.argv) > 2:
+        main(sys.argv[1],sys.argv[2])
+    elif sys.argv[1] == 'all':
+        for puzzle in parsermap:
+            #print(puzzle,'->','../puzzle_jsonl/'+puzzle[1:].replace('/','_')+'.jsonl')
+            main(puzzle,'../puzzle_jsonl/'+puzzle[1:].replace('/','_')+'.jsonl')
+    #for puzzle in parsermap:
+    #    main(puzzle,'/dev/null')
 

@@ -83,4 +83,11 @@ step may produce errors and require defining parsers or manually editing the
 relative to `/Raetsel` on the server, such as `/Sudoku` and the output file can
 be anything, preferably with the `.jsonl` extension.
 
+# status
+
+All puzzles have been parsed for a download of the website on 2022-05-11. The
+individual puzzles are given as a batch in a `.jsonl.bz2` file in the `/data`
+directory. The puzzles not parsed (requiring special handling) are in
+`/data/puzzle_special.7z`.
+
 # todo
