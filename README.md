@@ -71,7 +71,9 @@ Note: all paths are relative to the root of this repository.
 web pages and store then as `.x-janko` files (containing text) in
 `puzzle_x-janko`. This part should run smoothly since there was no issue with
 parsing the web pages as of May 2022.
-3. Run `python3 ./parser/parse_data.py <PUZZLE> <FILE>` to convert all of a
+3. Run `python3 ./parser/download_extra.py` to find extra puzzles that are not
+found by `wget`. This will save more `.x-janko` files.
+4. Run `python3 ./parser/parse_data.py <PUZZLE> <FILE>` to convert all of a
 puzzle type to a JSONL file. Due to inconsistencies in the puzzle data, this
 step may produce errors and require defining parsers or manually editing the
 `.x-janko` files to complete successfully. The puzzle is specified as a path
@@ -79,12 +81,3 @@ relative to `/Raetsel` on the server, such as `/Sudoku` and the output file can
 be anything, preferably with the `.jsonl` extension.
 
 # todo
-
-Downloader script does not actually download all the puzzles from the website.
-For example, there are 20 Area-51 puzzles, but only 3 are downloaded. A possible
-solution is to enumerate puzzles and try to download pages individually.
-
-Another reasonable solution is to attempt to download higher numbered puzzles by
-looking at the numbers that already exist in a directory (or starting from 1 if
-it happens to be an empty directory). This process could try until finding a
-page without the "data" element, possibly the 404 page.
