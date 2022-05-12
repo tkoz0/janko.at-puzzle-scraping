@@ -64,7 +64,8 @@ a time for further use.
 
 # instructions
 
-Note: all paths are relative to the root of this repository.
+Note: all paths are given relative to the root of this repository, but you must
+run them in the `/parser` directory because they have hardcoded relative paths.
 
 1. Run `./download_site.sh` to save the website to `www.janko.at` using `wget`.
 2. Run `python3 ./parser/extract_data.py` to extract the data portion from the
@@ -73,7 +74,9 @@ web pages and store then as `.x-janko` files (containing text) in
 parsing the web pages as of May 2022.
 3. Run `python3 ./parser/download_extra.py` to find extra puzzles that are not
 found by `wget`. This will save more `.x-janko` files.
-4. Run `python3 ./parser/parse_data.py <PUZZLE> <FILE>` to convert all of a
+4. Make the changes in `./parser/edits.txt` to avoid errors in parsing. It is
+possible that more errors will come up and result in more necessary edits.
+5. Run `python3 ./parser/parse_data.py <PUZZLE> <FILE>` to convert all of a
 puzzle type to a JSONL file. Due to inconsistencies in the puzzle data, this
 step may produce errors and require defining parsers or manually editing the
 `.x-janko` files to complete successfully. The puzzle is specified as a path

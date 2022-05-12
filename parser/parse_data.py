@@ -24,110 +24,110 @@ base_dir = os.path.normpath('../puzzle_x-janko/')
 # puzzle path -> list of parsers to try (try in order until one works)
 parsermap: Dict[str,List[PuzzleParser]] = dict()
 
-'''
-Puzzles with no x-janko files:
-/Airando
-/Aisurom
-/Alphametics
-/Alphametics/Additionen
-/Alphametics/Goetter
-/Alphametics/Klassisch
-/Alphametics/Loy
-/Alphametics/Metamatik
-/Alphametics/Wurzeln
-/Altay
-/Amibo
-/Analogien
-/Autoren
-/Banzu
-/Battleships-Lighthouses
-/Begriffe
-/Biographien
-/Blackbox
-/Bleistifte
-/Bodaburokku
-/Bogdan
-/Bolota
-/Bonsan
-/Branqueta
-/Carroll
-/Chatroom
-/Chokuhashi
-/Chronik
-/Cross-The-Streams
-/Diogenes
-/Doppel-Schokolade
-/Doughnut
-/Ekici
-/Friedman
-/Gedichte
-/Gedichte/04
-/Gedichte/07
-/Gedichte/08
-/Gedichte/10
-/H2O
-/Hiroimono
-/Hitori-Ribashi
-/Ichimaga
-/International-Borders
-/Kalkulu
-/Kanjo
-/Karakiri
-/Kazunori
-/Kreuzzahlen
-/Kuroclone
-/Lagioia
-/Laterale
-/Literatur
-/LMI
-/Logicals
-/Logik
-/Mainarizumu
-/Manekingeto
-/Mathematik
-/Mejirinku
-/Milchkaffee
-/Milchtee
-/Mittelweg
-/Molekularis
-/Nagareru
-/Nagewawa
-/Nanro/Hex
-/Nikoli
-/Nishiyama
-/Null-Zwei-Fuenf
-/OAPC
-/Out-Of-Sight
-/Pathfinder
-/Peeters
-/Pentominos
-/Physik
-/Polyonimos
-/Portugalov
-/Rectslider
-/Renban-Madoguchi
-/Saltatori
-/Sashikaku
-/Serpentominos
-/Sphinx
-/Stained-Glass
-/Statue-Park
-/Sudoku/Subset
-/Sukaku
-/Sukima
-/Summandum
-/Takahiko
-/Targets
-/Tawa
-/Triplace
-/Trivia
-/Um-Die-Ecke-Gedacht
-/Vermischtes
-/Wortwandlung
-/WPF
-/Zahlenpfad
-/Zeiger
-'''
+# empty directories (no parser needed)
+noparserlist = [
+'', # for root dir
+'/Aisurom',
+'/Alphametics',
+'/Alphametics/Additionen',
+'/Alphametics/Goetter',
+'/Alphametics/Klassisch',
+'/Alphametics/Loy',
+'/Alphametics/Metamatik',
+'/Alphametics/Wurzeln',
+'/Altay',
+'/Amibo',
+'/Analogien',
+'/Autoren',
+'/Banzu',
+'/Battleships-Lighthouses',
+'/Begriffe',
+'/Biographien',
+'/Blackbox',
+'/Bleistifte',
+'/Bodaburokku',
+'/Bogdan',
+'/Bolota',
+'/Bonsan',
+'/Branqueta',
+'/Carroll',
+'/Chatroom',
+'/Chokuhashi',
+'/Chronik',
+'/Cross-The-Streams',
+'/Diogenes',
+'/Doppel-Schokolade',
+'/Doughnut',
+'/Ekici',
+'/Friedman',
+'/Friedman/img',
+'/Gedichte',
+'/Gedichte/04',
+'/Gedichte/07',
+'/Gedichte/08',
+'/Gedichte/10',
+'/H2O',
+'/Hiroimono',
+'/Hitori-Ribashi',
+'/Ichimaga',
+'/International-Borders',
+'/Kalkulu',
+'/Kanjo',
+'/Karakiri',
+'/Kazunori',
+'/Kreuzzahlen',
+'/Kuroclone',
+'/Lagioia',
+'/Laterale',
+'/Literatur',
+'/LMI',
+'/Logicals',
+'/Logik',
+'/Mainarizumu',
+'/Manekingeto',
+'/Mathematik',
+'/Mejirinku',
+'/Milchkaffee',
+'/Mittelweg',
+'/Molekularis',
+'/Nagareru',
+'/Nagewawa',
+'/Nanro/Hex',
+'/Nikoli',
+'/Nikoli/img',
+'/Nishiyama',
+'/Null-Zwei-Fuenf',
+'/OAPC',
+'/Out-Of-Sight',
+'/Pathfinder',
+'/Peeters',
+'/Pentominos',
+'/Physik',
+'/Polyominos',
+'/Portugalov',
+'/Rectslider',
+'/Renban-Madoguchi',
+'/Saltatori',
+'/Sashikaku',
+'/Sphinx',
+'/Stained-Glass',
+'/Statue-Park',
+'/Sudoku/Subset',
+'/Summandum',
+'/Takahiko',
+'/Targets',
+'/Tawa',
+'/Triplace',
+'/Trivia',
+'/Um-Die-Ecke-Gedacht',
+'/Vermischtes',
+'/Wortwandlung',
+'/WPF',
+'/Zahlenpfad',
+'/Zeiger',
+'/img',
+'/img2'
+]
 
 def createParsers():
     '''
@@ -180,6 +180,9 @@ def createParsers():
     p0.addGrid('solution','size','size')
     parsermap['/Abc-Pfad'] = [p0]
 
+    # /Airando
+    parsermap['/Airando'] = [psizegrid]
+
     # /Aisuban
     parsermap['/Aisuban'] = [psizegridareas,prcgridareas]
 
@@ -189,13 +192,13 @@ def createParsers():
     # /Anglers (edited: 35)
     parsermap['/Anglers'] = [psizegrid,prcgrid]
 
-    # /Aqre
+    # /Aqre (edited: 58)
     parsermap['/Aqre'] = [psizegridareas]
 
     # /Araf (moved: Different-Neighbors, Inequality)
     parsermap['/Araf'] = [psizegrid,prcgrid]
 
-    # /Area-51
+    # /Area-51 (edited: 12)
     p0 = copy.deepcopy(psizegrid)
     p0.addGrid('nodes','size','size',lambda x:x+1,lambda x:x+1)
     p1 = copy.deepcopy(prcgrid)
@@ -214,7 +217,7 @@ def createParsers():
     # /Arukone-3
     parsermap['/Arukone-3'] = [psizegrid,prcgrid]
 
-    # /Battlemines
+    # /Battlemines (edited: 234)
     p0 = copy.deepcopy(psizegrid)
     p0.addStr('ships') # list of integers???
     parsermap['/Battlemines'] = [p0]
@@ -231,7 +234,7 @@ def createParsers():
     # /Battleships-Retrograde
     parsermap['/Battleships-Retrograde'] = parsermap['/Battleships']
 
-    # /Bosanowa (edited: 34)
+    # /Bosanowa
     parsermap['/Bosanowa'] = [psizegrid,prcgrid]
 
     # /Boxing-Match
@@ -372,7 +375,7 @@ def createParsers():
     # /Geradeweg
     parsermap['/Geradeweg'] = [psizegrid]
 
-    # /Gokigen-Naname (edited: 184)
+    # /Gokigen-Naname (edited: 184,747,748,757,758)
     p0 = copy.deepcopy(psizegrid)
     p1 = copy.deepcopy(prcgrid)
     p0.removeProp('problem')
@@ -390,7 +393,7 @@ def createParsers():
     # /Gyokuseki
     parsermap['/Gyokuseki'] = [psizegrid_labels2]
 
-    # /Hakoiri (edited: 75)
+    # /Hakoiri
     parsermap['/Hakoiri'] = [psizegridareas]
 
     # /Hakyuu
@@ -402,7 +405,7 @@ def createParsers():
     # /Hanare
     parsermap['/Hanare'] = [psizegridareas]
 
-    # /Hashi (edited: 572)
+    # /Hashi
     parsermap['/Hashi'] = [psizegrid,prcgrid]
 
     # /Hashi-2
@@ -414,8 +417,14 @@ def createParsers():
     # /Herugolf
     parsermap['/Herugolf'] = [psizegrid,prcgrid]
 
-    # /Heyawake (edited: 576)
+    # /Heyawake
     parsermap['/Heyawake'] = [prcgridareas,psizegridareas]
+
+    # /Heyawake/AYE (edited: 59,177)
+    parsermap['/Heyawake/AYE'] = [prcgridareas,psizegridareas]
+
+    # /Heyawake/AYE-2 (edited: 21,31,34,44,45)
+    parsermap['/Heyawake/AYE-2'] = [prcgridareas,psizegridareas]
 
     # /Hidoku
     parsermap['/Hidoku'] = [psizegrid]
@@ -554,6 +563,9 @@ def createParsers():
     # /Meadows
     parsermap['/Meadows'] = [psizegrid]
 
+    # /Milchtee
+    parsermap['/Milchtee'] = [psizegrid]
+
     # /Minesweeper
     p0 = copy.deepcopy(prcgrid)
     p1 = copy.deepcopy(psizegrid)
@@ -576,7 +588,7 @@ def createParsers():
     # /Mochinyoro
     parsermap['/Mochinyoro'] = [psizegrid,prcgrid]
 
-    # /Moonsun (edited: 19)
+    # /Moonsun
     parsermap['/Moonsun'] = [psizegridareas,prcgridareas]
 
     # /Mosaik
@@ -624,8 +636,17 @@ def createParsers():
     # /Nondango
     parsermap['/Nondango'] = [psizegridareas,prcgridareas]
 
-    # /Nonogramme (edited: 2125)
-    parsermap['/Nonogramme'] = [prcgrid,psizegrid]
+    # /Nonogramme
+    p2 = copy.deepcopy(prcgrid)
+    p2.addGrid('rlabels','rows','cols',flags='s')
+    p2.addGrid('clabels','cols','rows',flags='s')
+    p3 = copy.deepcopy(psizegrid)
+    p3.addGrid('rlabels','size','size',flags='s')
+    p3.addGrid('clabels','size','size',flags='s')
+    parsermap['/Nonogramme'] = [prcgrid,psizegrid,p2,p3]
+
+    # /Nonograms
+    parsermap['/Nonograms'] = parsermap['/Nonogramme']
 
     # /Norinori
     parsermap['/Norinori'] = [psizegridareas,prcgridareas]
@@ -639,8 +660,19 @@ def createParsers():
     # /Nurikabe-Pairs
     parsermap['/Nurikabe-Pairs'] = [psizegrid]
 
-    # /Nurimaze (moved: Dead-End,Forbidden-Four)
+    # /Nurimaze
     parsermap['/Nurimaze'] = [psizegridareas,prcgridareas]
+
+    # /Nurimaze/Dead-End
+    p1 = copy.deepcopy(psizegridareas)
+    p1.addInt('begin') # handle case with integer on begin line
+    parsermap['/Nurimaze/Dead-End'] = [psizegridareas,p1]
+
+    # /Nurimaze/Domino
+    parsermap['/Nurimaze/Domino'] = [psizegridareas]
+
+    # /Nurimaze/Forbidden-Four
+    parsermap['/Nurimaze/Forbidden-Four'] = [psizegridareas]
 
     # /Nurimisaki
     parsermap['/Nurimisaki'] = [psizegrid]
@@ -668,7 +700,7 @@ def createParsers():
     p0.addGrid('labels','size','size')
     parsermap['/Pfeilpfad'] = [p0]
 
-    # /Pfeilzahlen (edited: 24,81)
+    # /Pfeilzahlen (edited: 24)
     p0 = copy.deepcopy(psizegrid)
     p0.removeProp('problem')
     p0.removeProp('solution')
@@ -698,7 +730,7 @@ def createParsers():
     # /Pipelink
     parsermap['/Pipelink'] = [psizegrid,prcgrid]
 
-    # /Putteria (edited: 1)
+    # /Putteria
     parsermap['/Putteria'] = [psizegridareas,prcgridareas]
 
     # /Raitonanba
@@ -712,7 +744,7 @@ def createParsers():
     p0.addNone('negative')
     parsermap['/Rechengitter'] = [p0]
 
-    # /Reflect (edited: 119)
+    # /Reflect
     parsermap['/Reflect'] = [psizegrid,prcgrid]
 
     # /Regenwolken
@@ -756,11 +788,17 @@ def createParsers():
     # /Schlange/Knight
     parsermap['/Schlange/Knight'] = parsermap['/Schlange/Akkara']
 
+    # /Schlangenlinie
+    parsermap['/Schlangenlinie'] = [prcgrid,psizegrid]
+
     # /Scrin
     parsermap['/Scrin'] = [psizegrid,prcgrid]
 
     # /Seek-Numbers (deleted: 13,14)
     parsermap['/Seek-Numbers'] = [prcgrid]
+
+    # /Serpentominos
+    parsermap['/Serpentominos'] = [prcgrid]
 
     # /Shakashaka
     parsermap['/Shakashaka'] = [psizegrid,prcgrid]
@@ -777,10 +815,10 @@ def createParsers():
     # /Shugaku
     parsermap['/Shugaku'] = [psizegrid,prcgrid]
 
-    # /Sikaku (edited: 313)
+    # /Sikaku
     parsermap['/Sikaku'] = [prcgrid,psizegrid]
 
-    # /Slitherlink (edited: 1104)
+    # /Slitherlink
     parsermap['/Slitherlink'] = [prcgrid,psizegrid]
 
     # /Snake-Pit
@@ -869,7 +907,7 @@ def createParsers():
     ppu.addParamsPattern(p1)
     parsermap['/Sudoku/Killer'] = [p0,p1]
 
-    # /Sudoku/Konsekutiv (edited: 95)
+    # /Sudoku/Konsekutiv
     parsermap['/Sudoku/Konsekutiv'] = [psizegrid]
 
     # /Sudoku/Kropki
@@ -917,16 +955,31 @@ def createParsers():
 
     # /Sudoku-Cup (moved: all)
 
+    # /Sudoku-Kropki
+    parsermap['/Sudoku-Kropki'] = parsermap['/Sudoku/Kropki']
+
+    # /Sudoku-Odd-Even
+    parsermap['/Sudoku-Odd-Even'] = parsermap['/Sudoku/Odd-Even']
+
+    # /Sudoku-Randsummen (edited: 94)
+    parsermap['/Sudoku-Randsummen'] = parsermap['/Sudoku/Randsummen']
+
     # /Sudoku-Varianten (moved: all)
 
-    # /Suguru (edited: 3)
+    # /Suguru
     parsermap['/Suguru'] = [psizegridareas]
+
+    # /Sukaku
+    parsermap['/Sukaku'] = [psizegrid,psizegridareas]
 
     # /Sukano
     p0 = copy.deepcopy(psizegrid)
     p0.addGrid('rlabels','size','size',flags='s')
     p0.addGrid('clabels','size','size',flags='s')
     parsermap['/Sukano'] = [p0]
+
+    # /Sukima
+    parsermap['/Sukima'] = [psizegrid]
 
     # /Sukoro
     parsermap['/Sukoro'] = [psizegrid]
@@ -957,12 +1010,21 @@ def createParsers():
     # /Tapa
     parsermap['/Tapa'] = [psizegrid,prcgrid]
 
-    # /Tapa-Varienten (moved: all)
+    # /Tapa/1-to-N
+    parsermap['/Tapa/1-to-N'] = [psizegrid]
+
+    # /Tapa/Islands
+    parsermap['/Tapa/Islands'] = [psizegrid]
+
+    # /Tapa-Varianten (moved: all)
+
+    # /Tapa/Yin-Yang
+    parsermap['/Tapa/Yin-Yang'] = [psizegrid]
 
     # /Tasukuea (edited: 8)
     parsermap['/Tasukuea'] = [psizegrid]
 
-    # /Tatamibari (edited: 117)
+    # /Tatamibari
     parsermap['/Tatamibari'] = [psizegrid]
 
     # /Tateboo-Yokoboo
@@ -1071,7 +1133,7 @@ def createParsers():
     # /Zeltlager
     parsermap['/Zeltlager'] = [psizegrid,prcgrid]
 
-    # /Zeltlager-2 (edited: 345)
+    # /Zeltlager-2
     parsermap['/Zeltlager-2'] = [psizegrid]
 
     # /Ziegelmauer
@@ -1088,24 +1150,40 @@ def createParsers():
     p0.addStrLong('solution',re.compile(r'^.+...$')) # lines with >= 4 chars
     parsermap['/Zitatemix'] = [p0]
 
-    # /Zwischenknick (edited: 3)
+    # /Zwischenknick
     parsermap['/Zwischenknick'] = [psizegrid]
 
 createParsers()
 
-if __name__ == '__main__':
+# check if parsers are missing
+if 1:
+    for dirpath,dirnames,filenames in os.walk(base_dir):
+        puzzle_path = dirpath[len(base_dir):]
+        if puzzle_path in parsermap:
+            #print('in parsermap:',puzzle_path)
+            if len(filenames) == 0:
+                print('remove from parsermap:',puzzle_path)
+                #break
+            #assert len(filenames) > 0
+        else:
+            #print('NOT in parsermap:',puzzle_path)
+            if len(filenames) > 0:
+                print('add to parsermap:',puzzle_path)
+                #break
+            elif puzzle_path not in noparserlist:
+                print('add to noparsermap:',puzzle_path)
+            #assert len(filenames) == 0
 
-    puzzle = sys.argv[1]
-    out_file = sys.argv[2]
+def main(puzzle: str, out_file: str):
+    #puzzle = sys.argv[1]
+    #out_file = sys.argv[2]
     assert puzzle.startswith('/')
     dir_path = base_dir + ('' if puzzle == '/' else puzzle)
     file_name_list = sorted(os.listdir(dir_path))
     files = [dir_path+'/'+f for f in file_name_list if os.path.isfile(dir_path+'/'+f)]
     jsonl_data: List[Dict[str,Union[str,Dict[str,PropType]]]] = []
-
     tqdm.write('opening dir: '+dir_path+' (%d files)'%len(files))
     failed_files = []
-
     for file in tqdm(files):
         file_rel = puzzle+'/'+os.path.split(file)[1] # relative to /Raetsel dir
         tqdm.write('\nprocessing: '+file_rel)
@@ -1126,7 +1204,6 @@ if __name__ == '__main__':
             failed_files.append(file)
         else:
             jsonl_data.append({'file':file_rel,'data':result})
-
     print()
     print('failed files (%d):'%len(failed_files))
     print('\n'.join(failed_files))
@@ -1137,4 +1214,11 @@ if __name__ == '__main__':
         outf.write(json.dumps(obj,separators=(',',':'))+'\n')
     outf.close()
     print('done')
+    if len(failed_files) > 0:
+        assert 0
+
+if __name__ == '__main__':
+    #main(sys.argv[1],sys.argv[2])
+    for puzzle in parsermap:
+        main(puzzle,'/dev/null')
 

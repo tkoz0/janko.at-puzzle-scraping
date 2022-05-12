@@ -121,7 +121,8 @@ class PuzzleParser:
                 line = next(lines).split()
             except StopIteration:
                 break
-            if line == ['end'] or line == ['send'] or line == ['eend'] or line == ['endend']:
+            if line == ['end'] or line == ['send'] or line == ['eend'] or line == ['endend'] \
+                    or line == ['ends'] or line == ['ssend']:
                 found_end = True
                 break
             prop = line[0].lower()

@@ -1,0 +1,156 @@
+Edits to make to puzzle files to avoid parsing errors.
+
+/Anglers/035.a.x-janko
+Remove the extra '@' at the end of the last "problem" grid row.
+
+/Aqre/058.a.x-janko
+Remove the line with "!)" (actually the upside down '!').
+
+/Araf/Different-Neighbors.x-janko
+/Araf/Inequality.x-janko
+Remove these files. They require special handling.
+
+/Area-51/012.a.x-janko
+Change "rows" from 14 to 15.
+
+/Battlemines/234.a.x-janko
+Change "size" from 10 to 8.
+
+/Battleships/016.a.x-janko
+/Battleships/039.a.x-janko
+The last row of the "solution" grid is extra, delete it.
+
+/Elbow-Room/005.a.x-janko
+Add a '-' to the last row of the "celltext" grid.
+
+/Foseruzu/047.a.x-janko
+Insert a "moves" line before the moves data.
+
+/Galaxien/445.a.x-janko
+Insert a "moves" line before the moves data.
+
+/Gokigen-Naname/184.a.x-janko
+Change "#raqsource" to "source".
+
+/Gokigen-Naname/747.a.x-janko
+/Gokigen-Naname/748.a.x-janko
+/Gokigen-Naname/757.a.x-janko
+/Gokigen-Naname/758.a.x-janko
+Change "size" from 16 to 17.
+
+/Hebi-Ichigo/064.a.x-janko
+Change "ssource" to "source".
+
+/Hebi-Ichigo/Basilisks.x-janko
+/Hebi-Ichigo/Seconds.x-janko
+Remove these files. They require special handling.
+
+/Heyawake/AYE/059.a.x-janko
+Move the "end" at the end of the file onto its own line.
+
+/Heyawake/AYE/177.a.x-janko
+Remove the line with "!)" (actually the upside down '!').
+
+/Heyawake/AYE-2/021.a.x-janko
+Remove the extra '-' on every row of the "problem" grid.
+Add an extra row with 10 '-' to the "problem" grid.
+
+/Heyawake/AYE-2/031.a.x-janko
+/Heyawake/AYE-2/034.a.x-janko
+/Heyawake/AYE-2/045.a.x-janko
+Remove the line with "aa)" (the one with strange characters).
+
+/Heyawake/AYE-2/044.a.x-janko
+Change "roblem" to "problem".
+
+/Kurotto/082.a.x-janko
+Add an extra '-' to the end of the last row of the "solution" grid.
+
+/LITS/281.a.x-janko
+/LITS/282.a.x-janko
+/LITS/284.a.x-janko
+/LITS/285.a.x-janko
+/LITS/286.a.x-janko
+/LITS/287.a.x-janko
+/LITS/288.a.x-janko
+/LITS/289.a.x-janko
+/LITS/290.a.x-janko
+Remove one of the extra "areas" lines.
+
+/Maeander/024.a.x-janko
+/Maeanderzahlen/024.a.x-janko
+Insert a "moves" line before the moves data.
+
+/Miss-Lupun/171.a.x-janko
+Remove the bottom row of the "problem" grid.
+
+/Nanro/Signpost/015.a.x-janko
+/Nanro/Signpost/016.a.x-janko
+/Nanro/Signpost/017.a.x-janko
+/Nanro/Signpost/018.a.x-janko
+Delete these files. There is no puzzle data.
+
+/Pfeilpfad/175.a.x-janko
+Remove the "labels" line and the line below it.
+
+/Pfeilzahlen/024.a.x-janko
+Remove the last '-' on the last row of the "problem" grid.
+
+/Rundreise/005.a.x-janko
+Remove the "rows 10" line.
+
+/Sashigane/020.a.x-janko
+Remove the "end" on the last row of the "solution" grid.
+
+/Sashigane/060.a.x-janko
+Change "sinfo" to "info".
+
+/Seek-Numbers/013.a.x-janko
+/Seek-Numbers/014.a.x-janko
+Delete these files. There is no puzzle data.
+
+/Spukschloss/010.a.x-janko
+Remove the "f.solve yes" line.
+
+/Sternenhimmel/025.a.x-janko
+Remove the extra '-' at the end of the "rlabels" and "clabels" properties.
+
+/Sternennacht/026.a.x-janko
+Insert a "moves" line before the moves data.
+
+/Stitches/002.a.x-janko
+Move the "end" at the end of the file onto its own line.
+
+/Straights/005.a.x-janko
+Remove the line right before the "end" line.
+
+/Straights/463.a.x-janko
+Remove the "ajh" weird characters in "ajhsource".
+
+/Sudoku/Randsummen/094.a.x-janko
+/Sudoku-Randsummen/094.a.x-janko
+Change "aolver" to "solver".
+
+/Tasukuea/008.a.x-janko
+Move the "end" at the end of the file onto its own line.
+
+/Usoone/051.a.x-janko
+Delete everything before the "begin" in the "problembegin" line.
+
+/Wasserspass/003.a.x-janko
+Remove 1 of the "solution" lines.
+
+/Wolkenkratzer/410.a.x-janko
+Remove everything before the "begin" in the "5 4 3 2 1begin" line.
+
+/Yajisan-Kazusan/Inverted.x-janko
+/Yajisan-Kazusan/Liar.x-janko
+/Yajisan-Kazusan/Liar-Arrows.x-janko
+/Yajisan-Kazusan/No-2x2.x-janko
+/Yajisan-Kazusan/Odd.x-janko
+/Yajisan-Kazusan/Off-By-One.x-janko
+Remove these files. They require special handling.
+
+/Zahlenlabyrinth/001.a.x-janko
+The 3 grids are duplicated. Delete the bottom 5 rows of each.
+
